@@ -1,0 +1,77 @@
+[General]
+bypass-system = true
+skip-proxy = 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, localhost, *.local, captive.apple.com
+tun-excluded-routes = 10.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.88.99.0/24, 192.168.0.0/16, 198.18.0.0/15, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 255.255.255.255/32
+dns-server = system
+ipv6 = false
+
+[Rule]
+
+# BGMI and related domains with BGMI proxy group
+DOMAIN-SUFFIX,pubgmobile.com,BGMI
+DOMAIN-SUFFIX,pubgm.com,BGMI
+DOMAIN-SUFFIX,igamecj.com,BGMI
+DOMAIN-SUFFIX,igamecj.akamaized.net,BGMI
+DOMAIN-SUFFIX,qcloud.com,BGMI
+DOMAIN-SUFFIX,qcloudcdn.com,BGMI
+DOMAIN-SUFFIX,tencentcloud.com,BGMI
+DOMAIN-SUFFIX,gcloud.tencent.com,BGMI
+DOMAIN-SUFFIX,cdn.gcloud.tencent.com,BGMI
+DOMAIN-SUFFIX,akamaized.net,BGMI
+DOMAIN-SUFFIX,amazonaws.com,BGMI
+DOMAIN-SUFFIX,cmplay.club,BGMI
+
+# Other necessary BGMI and related system domains retained with DIRECT
+DOMAIN-SUFFIX,battle.net,DIRECT
+DOMAIN-SUFFIX,blizzard.com,DIRECT
+DOMAIN-SUFFIX,blzddist1-a.akamaihd.net,DIRECT
+DOMAIN-SUFFIX,cdn.angruo.com,DIRECT
+DOMAIN-SUFFIX,download.jetbrains.com,DIRECT
+DOMAIN-SUFFIX,file-igamecj.akamaized.net,DIRECT
+DOMAIN-SUFFIX,officecdn-microsoft-com.akamaized.net,DIRECT
+DOMAIN-SUFFIX,images-cn.ssl-images-amazon.com,DIRECT
+DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+DOMAIN-SUFFIX,aaplimg.com,DIRECT
+DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
+DOMAIN-SUFFIX,apple.co,DIRECT
+DOMAIN-SUFFIX,apple.com,DIRECT
+DOMAIN-SUFFIX,apple.com.cn,DIRECT
+DOMAIN-SUFFIX,appstore.com,DIRECT
+DOMAIN-SUFFIX,crashlytics.com,DIRECT
+DOMAIN-SUFFIX,icloud-content.com,DIRECT
+DOMAIN-SUFFIX,icloud.com,DIRECT
+DOMAIN-SUFFIX,icloud.com.cn,DIRECT
+DOMAIN-SUFFIX,me.com,DIRECT
+DOMAIN-SUFFIX,mzstatic.com,DIRECT
+DOMAIN-SUFFIX,google.cn,DIRECT
+DOMAIN-SUFFIX,tencent-cloud.net,DIRECT
+DOMAIN-SUFFIX,tencent.com,DIRECT
+DOMAIN-SUFFIX,tapbots.com,DIRECT
+DOMAIN-SUFFIX,akamaihd.net,DIRECT
+DOMAIN-SUFFIX,akamai.net,DIRECT
+
+# Replaced private/local IP CIDRs with BGMI Singapore proxy CIDRs
+IP-CIDR,13.250.0.0/15,BGMI
+IP-CIDR,52.74.0.0/16,BGMI
+IP-CIDR,54.169.0.0/16,BGMI
+
+[Host]
+localhost = 127.0.0.1
+
+[URL Rewrite]
+^http://(www.)?g.cn https://www.google.com 302
+^http://(www.)?google.cn https://www.google.com 302
+
+[Script]
+Alightmotion = type=http-response,script-path=https://raw.githubusercontent.com/iSteal-it/script/refs/heads/main/alight-motion.json,pattern=^https://us-central1-alight-creative.cloudfunctions.net/getAccountStatusAndLicenses,max-size=131072,requires-body=true,timeout=10,enable=true
+PicsArt = type=http-response,script-path=https://raw.githubusercontent.com/iSteal-it/script/refs/heads/main/picart.json,pattern=^https://api.picsart.com/gw-v2/shop/subscription/apple/purchases,max-size=131072,requires-body=true,timeout=10,enable=true
+VSCO=type=http-request,pattern=^https?://api.revenuecat.com/vd/subscribers/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
+VSCO1=type=http-response,pattern=^https?://api.revenuecat.com/vd/subscribers/,requires-body=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
+KineMaster = type=http-response,script-path=https://raw.githubusercontent.com/iSteal-it/script/refs/heads/main/Kinemaster.json,pattern=^https://api-account.kinemasters.com/v2/user/subscribe,max-size=131072,requires-body=true,timeout=10,enable=true
+SandboxPixelArt = type=http-response,script-path=https://N9dev-dev.github.io/SL/scripts/SandBox.js,pattern=https://api.sandbox.love/accounts/current,max-size=131072,requires-body=true,timeout=10,enable=true
+VivaCut = type=http-response,script-path=https://N9dev-dev.github.io/SL/scripts/VivaCut.js,pattern=https://N9dev-dev.github.io/SL/scripts/VivaCut.js,max-size=131072,requires-body=true,timeout=10,enable=true
+funimate = type=http-response,script-path=https://raw.githubusercontent.com/iSteal-it/script/main/Funimate.json,pattern=^https://api.funimate.com/users/me,max-size=131072,requires-body=true
+
+[MITM]
+hostname = api-account.kinemasters.com,us-central1-alight-creative.cloudfunctions.net,api.picsart.com,api.funimate.com,lapi.photomath.net,photos.adobe.io,api.revenuecat.com,app.algoriddim.com,buy.itunes.apple.com,web.vizmato.com,api.reface.video,api.revenuecat.com,api.busuu.com,api.calm.com,www.calm.com,api.unfold.app
+enable = true
